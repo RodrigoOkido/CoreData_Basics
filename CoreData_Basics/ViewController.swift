@@ -28,9 +28,9 @@ class ViewController: UIViewController {
 
     
     /**
-     Create some Person data to include in our CoreData. It added to a list to be able to access them by other entities / properties on this example.
+     Generate some Person data to include in our CoreData. It added to a list to be able to access them by other entities / properties on this example.
      */
-    func createPersonData() {
+    func generatePersonData() {
         
         let person1 = Person(context: persistentContainer.viewContext)
         person1.name = "Vincent Winters"
@@ -62,14 +62,17 @@ class ViewController: UIViewController {
         personList.append(person3)
         personList.append(person4)
         personList.append(person5)
-
+        
+        
+        // Save data changes on CoreData.
+        saveDataChanges()
     }
     
     
     /**
-     Create some Car data to include in our CoreData.
+     Generate some Car data to include in our CoreData.
      */
-    func createCarData() {
+    func generateCarData() {
         
         let car_model1 = Car(context: persistentContainer.viewContext)
         car_model1.transmission = "Automatic"
@@ -134,13 +137,16 @@ class ViewController: UIViewController {
         car_model5.person = personList[4]
         car_model6.person = personList[0]
 
+        
+        // Save data changes on CoreData.
+        saveDataChanges()
     }
     
     
     /**
-     Create some Movie data to include in our CoreData.
+     Generate some Movie data to include in our CoreData.
      */
-    func createMovieData() {
+    func generateMovieData() {
         
         let movie1 = Movie(context: persistentContainer.viewContext)
         movie1.name = "Homem-Aranha: Sem Volta Para Casa"
@@ -177,11 +183,14 @@ class ViewController: UIViewController {
         movie5.gender = "Animação, Comédia, Família, Fantasia"
         movie5.overview = "Uma garota chamada Mirabel Madrigal cresce como o único membro não mágico de sua família, que vivem escondidos em uma vibrante casa encantada nas montanhas da Colômbia."
         
+        
+        // Save data changes on CoreData.
+        saveDataChanges()
     }
     
     
     /**
-     Save data changes on Core Data.
+     Save any data changes on Core Data.
      */
     func saveDataChanges() {
         do {
@@ -189,6 +198,35 @@ class ViewController: UIViewController {
             textView.text = "Changes saved!\n\(textView.text ?? "")"
         } catch {
             textView.text = "Error: \(error)\n\(textView.text ?? "")"
+        }
+    }
+    
+    
+    /**
+     Wipe all data from the database.
+     */
+    func deleteAllData() {
+        do {
+            let personList = try persistentContainer.viewContext.fetch(Person.fetchRequest())
+            personList.forEach {
+                persistentContainer.viewContext.delete($0)
+            }
+            
+            let carList = try persistentContainer.viewContext.fetch(Car.fetchRequest())
+            carList.forEach {
+                persistentContainer.viewContext.delete($0)
+            }
+            
+            let movieList = try persistentContainer.viewContext.fetch(Movie.fetchRequest())
+            movieList.forEach {
+                persistentContainer.viewContext.delete($0)
+            }
+            
+            try persistentContainer.viewContext.save()
+            
+            textView.text = "Deleted\n\(textView.text ?? "")"
+        } catch {
+            textView.text = "Error on deletion: \(error)\n\(textView.text ?? "")"
         }
     }
 }
