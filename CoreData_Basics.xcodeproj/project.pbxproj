@@ -14,12 +14,12 @@
 		2BE894F727E286F70094862F /* CoreData_Basics.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2BE894F527E286F70094862F /* CoreData_Basics.xcdatamodeld */; };
 		2BE894F927E286FB0094862F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE894F827E286FB0094862F /* Assets.xcassets */; };
 		2BE894FC27E286FB0094862F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE894FA27E286FB0094862F /* LaunchScreen.storyboard */; };
-		2BE8952227E3C1A90094862F /* Car+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8951C27E3C1A90094862F /* Car+CoreDataClass.swift */; };
-		2BE8952327E3C1A90094862F /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8951D27E3C1A90094862F /* Car+CoreDataProperties.swift */; };
-		2BE8952427E3C1A90094862F /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8951E27E3C1A90094862F /* Movie+CoreDataClass.swift */; };
-		2BE8952527E3C1A90094862F /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8951F27E3C1A90094862F /* Movie+CoreDataProperties.swift */; };
-		2BE8952627E3C1A90094862F /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8952027E3C1A90094862F /* Person+CoreDataClass.swift */; };
-		2BE8952727E3C1A90094862F /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8952127E3C1A90094862F /* Person+CoreDataProperties.swift */; };
+		2BE8952E27E3F3A40094862F /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8952827E3F3A40094862F /* Person+CoreDataClass.swift */; };
+		2BE8952F27E3F3A40094862F /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8952927E3F3A40094862F /* Person+CoreDataProperties.swift */; };
+		2BE8953027E3F3A40094862F /* Car+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8952A27E3F3A40094862F /* Car+CoreDataClass.swift */; };
+		2BE8953127E3F3A40094862F /* Car+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8952B27E3F3A40094862F /* Car+CoreDataProperties.swift */; };
+		2BE8953227E3F3A40094862F /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8952C27E3F3A40094862F /* Movie+CoreDataClass.swift */; };
+		2BE8953327E3F3A40094862F /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE8952D27E3F3A40094862F /* Movie+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,12 +32,12 @@
 		2BE894F827E286FB0094862F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BE894FB27E286FB0094862F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BE894FD27E286FB0094862F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2BE8951C27E3C1A90094862F /* Car+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2BE8951D27E3C1A90094862F /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		2BE8951E27E3C1A90094862F /* Movie+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2BE8951F27E3C1A90094862F /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		2BE8952027E3C1A90094862F /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2BE8952127E3C1A90094862F /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2BE8952827E3F3A40094862F /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2BE8952927E3F3A40094862F /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2BE8952A27E3F3A40094862F /* Car+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2BE8952B27E3F3A40094862F /* Car+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Car+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		2BE8952C27E3F3A40094862F /* Movie+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataClass.swift"; sourceTree = "<group>"; };
+		2BE8952D27E3F3A40094862F /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,12 +86,12 @@
 		2BE8950F27E3B7440094862F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2BE8951C27E3C1A90094862F /* Car+CoreDataClass.swift */,
-				2BE8951D27E3C1A90094862F /* Car+CoreDataProperties.swift */,
-				2BE8951E27E3C1A90094862F /* Movie+CoreDataClass.swift */,
-				2BE8951F27E3C1A90094862F /* Movie+CoreDataProperties.swift */,
-				2BE8952027E3C1A90094862F /* Person+CoreDataClass.swift */,
-				2BE8952127E3C1A90094862F /* Person+CoreDataProperties.swift */,
+				2BE8952827E3F3A40094862F /* Person+CoreDataClass.swift */,
+				2BE8952927E3F3A40094862F /* Person+CoreDataProperties.swift */,
+				2BE8952A27E3F3A40094862F /* Car+CoreDataClass.swift */,
+				2BE8952B27E3F3A40094862F /* Car+CoreDataProperties.swift */,
+				2BE8952C27E3F3A40094862F /* Movie+CoreDataClass.swift */,
+				2BE8952D27E3F3A40094862F /* Movie+CoreDataProperties.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -167,15 +167,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BE8952427E3C1A90094862F /* Movie+CoreDataClass.swift in Sources */,
+				2BE8953127E3F3A40094862F /* Car+CoreDataProperties.swift in Sources */,
 				2BE894F127E286F70094862F /* ViewController.swift in Sources */,
 				2BE894ED27E286F70094862F /* AppDelegate.swift in Sources */,
+				2BE8952F27E3F3A40094862F /* Person+CoreDataProperties.swift in Sources */,
+				2BE8953227E3F3A40094862F /* Movie+CoreDataClass.swift in Sources */,
+				2BE8953027E3F3A40094862F /* Car+CoreDataClass.swift in Sources */,
+				2BE8953327E3F3A40094862F /* Movie+CoreDataProperties.swift in Sources */,
+				2BE8952E27E3F3A40094862F /* Person+CoreDataClass.swift in Sources */,
 				2BE894EF27E286F70094862F /* SceneDelegate.swift in Sources */,
-				2BE8952527E3C1A90094862F /* Movie+CoreDataProperties.swift in Sources */,
-				2BE8952627E3C1A90094862F /* Person+CoreDataClass.swift in Sources */,
-				2BE8952727E3C1A90094862F /* Person+CoreDataProperties.swift in Sources */,
-				2BE8952227E3C1A90094862F /* Car+CoreDataClass.swift in Sources */,
-				2BE8952327E3C1A90094862F /* Car+CoreDataProperties.swift in Sources */,
 				2BE894F727E286F70094862F /* CoreData_Basics.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

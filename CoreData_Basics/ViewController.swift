@@ -24,6 +24,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        deleteAllData()
+        
+        generatePersonData()
+        generateCarData()
+        generateMovieData()
     }
 
     
@@ -183,6 +189,13 @@ class ViewController: UIViewController {
         movie5.gender = "Animação, Comédia, Família, Fantasia"
         movie5.overview = "Uma garota chamada Mirabel Madrigal cresce como o único membro não mágico de sua família, que vivem escondidos em uma vibrante casa encantada nas montanhas da Colômbia."
         
+        
+        movie1.person = NSSet(object: personList[0])
+        movie2.person = NSSet(object: personList[1])
+        movie3.person = NSSet(object: personList[2])
+        movie4.person = NSSet(object: personList[2])
+        movie5.person = NSSet(object: personList[4])
+
         
         // Save data changes on CoreData.
         saveDataChanges()

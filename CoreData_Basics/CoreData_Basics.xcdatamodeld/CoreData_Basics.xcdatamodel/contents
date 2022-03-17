@@ -16,18 +16,18 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="overview" optional="YES" attributeType="String"/>
         <attribute name="released_year" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="movie" inverseEntity="Person"/>
+        <relationship name="person" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="movie" inverseEntity="Person"/>
     </entity>
     <entity name="Person" representedClassName="Person" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="car" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="person" inverseEntity="Car"/>
-        <relationship name="movie" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Movie" inverseName="person" inverseEntity="Movie"/>
+        <relationship name="car" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Car" inverseName="person" inverseEntity="Car"/>
+        <relationship name="movie" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Movie" inverseName="person" inverseEntity="Movie"/>
     </entity>
     <elements>
-        <element name="Person" positionX="-63" positionY="-18" width="128" height="104"/>
-        <element name="Car" positionX="-54" positionY="18" width="128" height="149"/>
-        <element name="Movie" positionX="-36" positionY="27" width="128" height="14"/>
+        <element name="Person" positionX="-273.650390625" positionY="-126.8937377929688" width="128" height="118"/>
+        <element name="Car" positionX="-469.7532958984375" positionY="32" width="128" height="163"/>
+        <element name="Movie" positionX="-36" positionY="27" width="128" height="133"/>
     </elements>
 </model>

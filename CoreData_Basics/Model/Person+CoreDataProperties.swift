@@ -19,8 +19,42 @@ extension Person {
     @NSManaged public var name: String?
     @NSManaged public var age: Int32
     @NSManaged public var email: String?
-    @NSManaged public var movie: Movie?
-    @NSManaged public var car: Car?
+    @NSManaged public var movie: NSSet?
+    @NSManaged public var car: NSSet?
+
+}
+
+// MARK: Generated accessors for movie
+extension Person {
+
+    @objc(addMovieObject:)
+    @NSManaged public func addToMovie(_ value: Movie)
+
+    @objc(removeMovieObject:)
+    @NSManaged public func removeFromMovie(_ value: Movie)
+
+    @objc(addMovie:)
+    @NSManaged public func addToMovie(_ values: NSSet)
+
+    @objc(removeMovie:)
+    @NSManaged public func removeFromMovie(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for car
+extension Person {
+
+    @objc(addCarObject:)
+    @NSManaged public func addToCar(_ value: Car)
+
+    @objc(removeCarObject:)
+    @NSManaged public func removeFromCar(_ value: Car)
+
+    @objc(addCar:)
+    @NSManaged public func addToCar(_ values: NSSet)
+
+    @objc(removeCar:)
+    @NSManaged public func removeFromCar(_ values: NSSet)
 
 }
 
