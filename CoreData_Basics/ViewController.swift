@@ -11,7 +11,8 @@ import CoreData
 class ViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
-    
+        
+    var personList: [Person] = []
     var persistentContainer: NSPersistentContainer {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
@@ -27,7 +28,7 @@ class ViewController: UIViewController {
 
     
     /**
-     Create some Person data to include in our CoreData.
+     Create some Person data to include in our CoreData. It added to a list to be able to access them by other entities / properties on this example.
      */
     func createPersonData() {
         
@@ -55,6 +56,13 @@ class ViewController: UIViewController {
         person5.name = "Clarice Cole"
         person5.email = "clarice_cole@email.com"
         person5.age = 63
+        
+        personList.append(person1)
+        personList.append(person2)
+        personList.append(person3)
+        personList.append(person4)
+        personList.append(person5)
+
     }
     
     
@@ -107,6 +115,25 @@ class ViewController: UIViewController {
         car_model5.top_speed = 200
         car_model5.price = 180000
         car_model5.year = 2019
+        
+        let car_model6 = Car(context: persistentContainer.viewContext)
+        car_model6.transmission = "Automatic"
+        car_model6.model = "Tucson"
+        car_model6.brand = "Hyundai"
+        car_model6.body_type = "Van"
+        car_model6.top_speed = 200
+        car_model6.price = 320000
+        car_model6.year = 2021
+        
+        
+        // Relationship PERSON <-> CAR (1-n)
+        car_model1.person = personList[0]
+        car_model2.person = personList[1]
+        car_model3.person = personList[2]
+        car_model4.person = personList[3]
+        car_model5.person = personList[4]
+        car_model6.person = personList[0]
+
     }
     
     
