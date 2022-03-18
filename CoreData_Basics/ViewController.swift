@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
         
     var personList: [Person] = []
+    var movieList: [Movie] = []
     var persistentContainer: NSPersistentContainer {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError()
@@ -24,6 +25,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+    }
+
+    // MARK: - DATA CREATION
+    /**
+     Generation of the database. Call each Entitity creation data function. To avoid data duplication, this function delete all data first before creates again.
+     */
+    @IBAction func generateData() {
+        textView.text = ""
         
         deleteAllData()
         
@@ -31,11 +41,10 @@ class ViewController: UIViewController {
         generateCarData()
         generateMovieData()
         
-//        showCars()
-        showHatchOwners()
+        textView.text = "Data created!\n"
     }
-
-    // MARK: - DATA CREATION
+    
+    
     /**
      Generate some Person data to include in our CoreData. It added to a list to be able to access them by other entities / properties on this example.
      */
@@ -247,17 +256,31 @@ class ViewController: UIViewController {
         movie10.gender = "Ação, Crime, Thriller"
         movie10.overview = "Um agente da DEA com PTSD retorna para casa após uma missão fracassada e agora deve proteger sua família de uma invasão de casa depois que um condenado recentemente libertado e seus capangas vêm atrás de seu estoque de milhões dentro da casa do agente."
         
+
+        movieList.append(movie1)
+        movieList.append(movie2)
+        movieList.append(movie3)
+        movieList.append(movie4)
+        movieList.append(movie5)
+        movieList.append(movie6)
+        movieList.append(movie7)
+        movieList.append(movie8)
+        movieList.append(movie9)
+        movieList.append(movie10)
         
-        movie1.person = NSSet(object: personList[0])
-        movie2.person = NSSet(object: personList[1])
-        movie3.person = NSSet(object: personList[2])
-        movie4.person = NSSet(object: personList[2])
-        movie5.person = NSSet(object: personList[3])
-        movie6.person = NSSet(object: personList[3])
-        movie7.person = NSSet(object: personList[3])
-        movie8.person = NSSet(object: personList[4])
-        movie9.person = NSSet(object: personList[4])
-        movie10.person = NSSet(object: personList[0])
+        
+        // Relationship PERSON <-> MOVIE (n-n)
+        movie1.addToPerson([personList[0], personList[1], personList[4]])
+        movie2.addToPerson([personList[0], personList[1], personList[3], personList[4]])
+        movie3.addToPerson([personList[0], personList[1], personList[2]])
+        movie4.addToPerson([personList[2], personList[3]])
+        movie5.addToPerson([personList[1], personList[4]])
+        movie6.addToPerson([personList[2], personList[4]])
+        movie7.addToPerson([personList[0], personList[1]])
+        movie8.addToPerson([personList[3], personList[4]])
+        movie9.addToPerson([personList[1], personList[2]])
+        movie10.addToPerson([personList[0], personList[1], personList[2], personList[3], personList[4]])
+
 
         
         // Save data changes on CoreData.
@@ -270,6 +293,7 @@ class ViewController: UIViewController {
      Save any data changes on Core Data.
      */
     func saveDataChanges() {
+        textView.text = ""
         do {
             try persistentContainer.viewContext.save()
             textView.text = "Changes saved!\n\(textView.text ?? "")"
@@ -282,8 +306,12 @@ class ViewController: UIViewController {
     /**
      Wipe all data from the database.
      */
-    func deleteAllData() {
+    @IBAction func deleteAllData() {
+        textView.text = ""
         do {
+            personList.removeAll()
+            movieList.removeAll()
+            
             let personList = try persistentContainer.viewContext.fetch(Person.fetchRequest())
             personList.forEach {
                 persistentContainer.viewContext.delete($0)
@@ -310,13 +338,18 @@ class ViewController: UIViewController {
     
     //MARK: - DATABASE QUERIES
     /**
-     Show all cars of the database.
+     Show all person who whatched Spider Man movie in the database.
      */
-    func showCars() {
+    @IBAction func showSpiderManViewers() {
+        textView.text = ""
         do {
-            let cars = try persistentContainer.viewContext.fetch(Car.fetchRequest())
-            let formatted = cars.map { "\t\($0)" }.joined(separator: "\n")
-            textView.text = "Query - all cars:\n\(formatted)\n\(textView.text ?? "")"
+            let request = Movie.fetchRequest()
+            request.predicate = NSPredicate(format: "name = %@" ,"Homem-Aranha: Sem Volta Para Casa")
+            let movie = try persistentContainer.viewContext.fetch(request).first
+
+            let allViewers = movie?.person as? Set<Person> ?? []
+            let formatted = allViewers.map { "\t\($0)" }.joined(separator: "\n")
+            textView.text = "Query - all viewers:\n\(formatted)\n\(textView.text ?? "")"
         } catch {
             textView.text = "Error on query: \(error)\n\(textView.text ?? "")"
         }
@@ -326,16 +359,20 @@ class ViewController: UIViewController {
     /**
      Show all owners of Hatch cars.
      */
-    func showHatchOwners() {
+    @IBAction func showHatchOwners() {
+        textView.text = ""
         do {
             let request = Person.fetchRequest()
-            let person_car = try persistentContainer.viewContext.fetch(request).first
+            let people = try persistentContainer.viewContext.fetch(request)
             
-            let allOwners = person_car?.car as? Set<Car>
-            let owners = allOwners?.filter({$0.body_type == "Hatch"})
-            
+            let owners = people.filter({ person in
+                return (person.car ?? []).contains(where: { car in
+                    (car as? Car)?.body_type == "Hatch"
+                })
+            })
+                        
             let formatted = owners.map { "\t\($0)" }
-            textView.text = "Query - current Hatch owners:\n\(formatted ?? "")\n\(textView.text ?? "")"
+            textView.text = "Query - current Hatch owners:\n\(formatted)\n\(textView.text ?? "")"
         } catch {
             textView.text = "Error on query: \(error)\n\(textView.text ?? "")"
         }

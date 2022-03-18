@@ -11,5 +11,7 @@ import CoreData
 
 @objc(Person)
 public class Person: NSManagedObject {
-
+    public override var description: String {
+        return self.name ?? ""
+    }
 }
