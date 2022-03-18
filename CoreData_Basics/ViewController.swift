@@ -30,9 +30,12 @@ class ViewController: UIViewController {
         generatePersonData()
         generateCarData()
         generateMovieData()
+        
+//        showCars()
+        showHatchOwners()
     }
 
-    
+    // MARK: - DATA CREATION
     /**
      Generate some Person data to include in our CoreData. It added to a list to be able to access them by other entities / properties on this example.
      */
@@ -111,7 +114,7 @@ class ViewController: UIViewController {
         car_model4.transmission = "Automatic"
         car_model4.model = "X6 M"
         car_model4.brand = "BMW"
-        car_model4.body_type = "Premium SUV"
+        car_model4.body_type = "SUV"
         car_model4.top_speed = 240
         car_model4.price = 250000
         car_model4.year = 2019
@@ -134,6 +137,24 @@ class ViewController: UIViewController {
         car_model6.price = 320000
         car_model6.year = 2021
         
+        let car_model7 = Car(context: persistentContainer.viewContext)
+        car_model7.transmission = "Automatic"
+        car_model7.model = "Duster"
+        car_model7.brand = "Renault"
+        car_model7.body_type = "SUV"
+        car_model7.top_speed = 200
+        car_model7.price = 99000
+        car_model7.year = 2022
+        
+        let car_model8 = Car(context: persistentContainer.viewContext)
+        car_model8.transmission = "Manual"
+        car_model8.model = "Kwid"
+        car_model8.brand = "Renault"
+        car_model8.body_type = "Hatch"
+        car_model8.top_speed = 180
+        car_model8.price = 50000
+        car_model8.year = 2015
+        
         
         // Relationship PERSON <-> CAR (1-n)
         car_model1.person = personList[0]
@@ -142,7 +163,9 @@ class ViewController: UIViewController {
         car_model4.person = personList[3]
         car_model5.person = personList[4]
         car_model6.person = personList[0]
-
+        car_model7.person = personList[1]
+        car_model8.person = personList[2]
+        
         
         // Save data changes on CoreData.
         saveDataChanges()
@@ -189,12 +212,52 @@ class ViewController: UIViewController {
         movie5.gender = "Animação, Comédia, Família, Fantasia"
         movie5.overview = "Uma garota chamada Mirabel Madrigal cresce como o único membro não mágico de sua família, que vivem escondidos em uma vibrante casa encantada nas montanhas da Colômbia."
         
+        let movie6 = Movie(context: persistentContainer.viewContext)
+        movie6.name = "Sem Saída"
+        movie6.released_year = 2022
+        movie6.duration = "1h 35m"
+        movie6.gender = "Terror, Thriller"
+        movie6.overview = "Darby Thorne é uma mulher que viaja devido a uma emergência familiar, fica presa em nevasca e é forçada a se abrigar numa área de descanso na estrada com um grupo de desconhecidos. Ao topar com uma garota sequestrada numa van, ela encara uma terrível luta de vida ou morte para descobrir quem é o sequestrador."
+        
+        let movie7 = Movie(context: persistentContainer.viewContext)
+        movie7.name = "Alerta Vermelho"
+        movie7.released_year = 2021
+        movie7.duration = "1h 57m"
+        movie7.gender = "Ação, Comédia, Crime, Thriller"
+        movie7.overview = "No mundo do crime internacional, a INTERPOL lança um Alerta Vermelho, o que inicia uma caçada para capturar a mais notória ladra de artes do globo."
+        
+        let movie8 = Movie(context: persistentContainer.viewContext)
+        movie8.name = "O Projeto Adam"
+        movie8.released_year = 2022
+        movie8.duration = "1h 46m"
+        movie8.gender = "Ficção científica, Aventura, Comédia"
+        movie8.overview = "Depois de viajar no tempo e ir parar em 2022 sem querer, o piloto de combate Adam Reed se une à sua versão de 12 anos de idade para salvar o futuro."
+        
+        let movie9 = Movie(context: persistentContainer.viewContext)
+        movie9.name = "Um dia difícil"
+        movie9.released_year = 2022
+        movie9.duration = "1h 36m"
+        movie9.gender = "Ação, Thriller, Crime"
+        movie9.overview = "Depois de tomar medidas extremas para encobrir um acidente, um policial corrupto começa a receber ameaças de uma misteriosa testemunha e as coisas saem do controle."
+        
+        let movie10 = Movie(context: persistentContainer.viewContext)
+        movie10.name = "The Commando"
+        movie10.released_year = 2022
+        movie10.duration = "1h 33m"
+        movie10.gender = "Ação, Crime, Thriller"
+        movie10.overview = "Um agente da DEA com PTSD retorna para casa após uma missão fracassada e agora deve proteger sua família de uma invasão de casa depois que um condenado recentemente libertado e seus capangas vêm atrás de seu estoque de milhões dentro da casa do agente."
+        
         
         movie1.person = NSSet(object: personList[0])
         movie2.person = NSSet(object: personList[1])
         movie3.person = NSSet(object: personList[2])
         movie4.person = NSSet(object: personList[2])
-        movie5.person = NSSet(object: personList[4])
+        movie5.person = NSSet(object: personList[3])
+        movie6.person = NSSet(object: personList[3])
+        movie7.person = NSSet(object: personList[3])
+        movie8.person = NSSet(object: personList[4])
+        movie9.person = NSSet(object: personList[4])
+        movie10.person = NSSet(object: personList[0])
 
         
         // Save data changes on CoreData.
@@ -202,6 +265,7 @@ class ViewController: UIViewController {
     }
     
     
+    //MARK: - Save & Delete
     /**
      Save any data changes on Core Data.
      */
@@ -240,6 +304,40 @@ class ViewController: UIViewController {
             textView.text = "Deleted\n\(textView.text ?? "")"
         } catch {
             textView.text = "Error on deletion: \(error)\n\(textView.text ?? "")"
+        }
+    }
+    
+    
+    //MARK: - DATABASE QUERIES
+    /**
+     Show all cars of the database.
+     */
+    func showCars() {
+        do {
+            let cars = try persistentContainer.viewContext.fetch(Car.fetchRequest())
+            let formatted = cars.map { "\t\($0)" }.joined(separator: "\n")
+            textView.text = "Query - all cars:\n\(formatted)\n\(textView.text ?? "")"
+        } catch {
+            textView.text = "Error on query: \(error)\n\(textView.text ?? "")"
+        }
+    }
+    
+    
+    /**
+     Show all owners of Hatch cars.
+     */
+    func showHatchOwners() {
+        do {
+            let request = Person.fetchRequest()
+            let person_car = try persistentContainer.viewContext.fetch(request).first
+            
+            let allOwners = person_car?.car as? Set<Car>
+            let owners = allOwners?.filter({$0.body_type == "Hatch"})
+            
+            let formatted = owners.map { "\t\($0)" }
+            textView.text = "Query - current Hatch owners:\n\(formatted ?? "")\n\(textView.text ?? "")"
+        } catch {
+            textView.text = "Error on query: \(error)\n\(textView.text ?? "")"
         }
     }
 }
